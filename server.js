@@ -19,8 +19,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
   });
-  app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+
 app.use(
     cookieSession({
       maxAge: 30 * 24 * 60 * 60 * 1000,
