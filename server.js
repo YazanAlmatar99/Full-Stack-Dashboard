@@ -6,6 +6,7 @@ const passport = require("passport");
 const bodyParser = require('body-parser');
 const keys = require('./config/keys')
 const path = require('path');
+const cors = require('cors')
 require("./models/User");
 require("./models/Horoscope");
 require("./models/Product");
@@ -19,7 +20,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
   });
-
+  
 app.use(
     cookieSession({
       maxAge: 30 * 24 * 60 * 60 * 1000,

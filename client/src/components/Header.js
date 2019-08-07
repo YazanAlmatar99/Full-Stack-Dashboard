@@ -11,12 +11,18 @@ class Header extends React.Component {
             case null:
                 return ;
             case false:
-              return <li><a href= '/auth/google'>Sign In With Google</a></li>
+              return <li><button onClick = {this.fetchUserFromGoogle}> Sign In With Google</button></li>
             default:
                 return [
                     <li key = "2"><a href="/api/logout">Logout</a></li>
                 ]
         }
+    }
+
+
+    fetchUserFromGoogle = ()=>{
+      fetch('/auth/google',{method:"GET"})
+      console.log('pressed')
     }
   render() {
     return (
