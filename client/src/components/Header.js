@@ -1,47 +1,46 @@
 import React from "react";
-import { Link } from 'react-router-dom'; 
-import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 class Header extends React.Component {
-
-
-
-    renderContent()
-    {
-        switch (this.props.auth) {
-            case null:
-                return ;
-            case false:
-              return <li><button onClick = {this.fetchUserFromGoogle}> Sign In With Google</button></li>
-            default:
-                return [
-                    <li key = "2"><a href="/api/logout">Logout</a></li>
-                ]
-        }
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      default:
+        return (
+          <li>
+            <button onClick={this.fetchUserFromGoogle}>
+              {" "}
+              Sign In With Google
+            </button>
+          </li>
+        );
+      case false:
+        return [
+          <li key="2">
+            <a href="/api/logout">Logout</a>
+          </li>
+        ];
     }
+  }
 
-
-    fetchUserFromGoogle = ()=>{
-      fetch('/auth/google',{method:"GET"})
-      console.log('pressed')
-    }
+  fetchUserFromGoogle = () => {
+    fetch("/auth/google", { method: "GET" });
+    console.log("pressed");
+  };
   render() {
     return (
-  
       <nav>
         <div>
-          <Link 
-           to = {this.props.auth ? '/dashboard' : '/'} 
-          >Ana Luisa</Link>
-          <ul>         
-              {this.renderContent()}            
-          </ul>
+          <Link to={this.props.auth ? "/dashboard" : "/"}>Ana Luisa</Link>
+          <ul>{this.renderContent()}</ul>
         </div>
       </nav>
     );
   }
 }
 
-const mapStateToProps = state =>{
-  return {auth:state.auth}
-}
+const mapStateToProps = state => {
+  return { auth: state.auth };
+};
 export default connect(mapStateToProps)(Header);
