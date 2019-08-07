@@ -13,13 +13,13 @@ require("./models/Product");
 require("./models/Inventory");
 require("./OAuth/passport");
 const app = express();
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, auth');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-  });
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, auth');
+//     res.header('Access-Control-Allow-Credentials', 'true');
+//     next();
+//   });
   
 app.use(
     cookieSession({

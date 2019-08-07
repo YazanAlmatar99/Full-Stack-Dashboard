@@ -6,16 +6,16 @@ class Header extends React.Component {
     switch (this.props.auth) {
       case null:
         return;
-      default:
+        case false:
+
         return (
           <li>
-            <button onClick={this.fetchUserFromGoogle}>
-              {" "}
+            <a href="/auth/google">
               Sign In With Google
-            </button>
+            </a>
           </li>
         );
-      case false:
+          default:
         return [
           <li key="2">
             <a href="/api/logout">Logout</a>
