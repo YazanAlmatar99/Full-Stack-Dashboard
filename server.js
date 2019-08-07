@@ -65,23 +65,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
     
   // Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
+  app.get('/api/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
-  app.get(
-    "/auth/google",
-    passport.authenticate("google", {
-      scope: ["profile", "email"]
-    })
-  );
-
-  app.get(
-    "/auth/google/callback",
-    passport.authenticate("google"),
-    (req, res) => {
-      res.redirect("/dashboard");
-    }
-  );
+ 
 }
 mongoose.set('useFindAndModify', false);
 mongoose.connect(keys.mongoURI,{useNewUrlParser: true});
