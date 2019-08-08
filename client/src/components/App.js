@@ -17,7 +17,7 @@ class App extends React.Component {
         <Router>
           <div>
           <Route exact path="/" component={Header} />          
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/api/dashboard" component={Dashboard} />
           </div>
         </Router>
       </div>
