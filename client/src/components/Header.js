@@ -32,7 +32,7 @@ class Header extends React.Component {
     return (
       <nav>
         <div>
-          <Link to={this.props.auth ? "/api/dashboard" : "/"}>Ana Luisa</Link>
+          <Link to={this.props.auth ? "/a/dashboard" : "/"}>Ana Luisa</Link>
           <ul>{this.renderContent()}</ul>
         </div>
       </nav>

@@ -50,7 +50,7 @@ module.exports = app => {
     mapProducts(products, todayDate, productsArray, res);
     console.log("I");
   }
-  app.get("/inventory", requireLogin,(req, res) => {
+  app.get("/api/v1/inventory", requireLogin,(req, res) => {
     var todayDate = "";
     var productsArray = [];
     var tempArray = [];
@@ -67,7 +67,7 @@ module.exports = app => {
       });
     console.log("1");
   });
-  app.get("/inventory/:id",requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/:id",requireLogin, (req, res) => {
     const requestId = req.params.id;
     Product.aggregate([
       {
@@ -88,7 +88,7 @@ module.exports = app => {
       res.send(productsObject);
     });
   });
-  app.get("/inventory/date/:date",requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/date/:date",requireLogin, (req, res) => {
     // date = yyyy-mm-dd
     const fullDate = req.params.date;
     var productsArray = [];
@@ -149,7 +149,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/inventory/:id/:date",requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/:id/:date",requireLogin, (req, res) => {
     const requestId = req.params.id;
     console.log(requestId);
     const requestedDate = req.params.date;
@@ -178,4 +178,5 @@ module.exports = app => {
         console.log("this should be the end");
       });
   });
+  
 };

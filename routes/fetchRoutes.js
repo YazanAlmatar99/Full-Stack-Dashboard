@@ -94,7 +94,7 @@ module.exports = app => {
         res.status(404).send({ message: error });
       });
   }
-  app.post("/dashboard/products", async (req, res) => {
+  app.post("/api/v1/inventory", async (req, res) => {
     if (req.query.analuisa_secret === keys.googleTriggerKey) {
       var page;
       page = 1;

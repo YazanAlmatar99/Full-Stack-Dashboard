@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
     
   // Handle React routing, return all requests to React app
-  app.get('/api/*', function(req, res) {
+  app.get('/a/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
  
@@ -62,4 +62,6 @@ mongoose.connect(keys.mongoURI,{useNewUrlParser: true});
 require("./routes/fetchRoutes")(app);
 require("./routes/authRoutes")(app);
 require("./routes/inventoryRoutes")(app);
+require("./routes/horoscopeRoutes")(app);
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
