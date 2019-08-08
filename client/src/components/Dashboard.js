@@ -39,7 +39,7 @@ class Dashboard extends React.Component {
   }
   fetchAPI = ()=> {
     var inputValue = document.getElementById("inputId").value
-    axios.delete(`http://localhost:5000/api/v1/horoscope/${inputValue}`,{params:this.state.userGoogleIdFromRes}).then(response => {
+    axios.delete(`/api/v1/horoscope/${inputValue}`,{params:this.state.userGoogleIdFromRes}).then(response => {
         console.log("its deleted");
         console.log(response);
       });
