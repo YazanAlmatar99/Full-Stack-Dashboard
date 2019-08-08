@@ -37,7 +37,7 @@ module.exports = app => {
       res.redirect("/dashboard");
     }
   );
-  app.get("/api/logout", (req, res) => {
+  app.get("/auth/logout", (req, res) => {
     req.logout();
     req.session = null;
     userAuthorized = false;

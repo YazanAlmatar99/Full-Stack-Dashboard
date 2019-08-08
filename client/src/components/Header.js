@@ -18,7 +18,7 @@ class Header extends React.Component {
           default:
         return [
           <li key="2">
-            <a href="/api/logout">Logout</a>
+            <a href="/auth/logout">Logout</a>
           </li>
         ];
     }
