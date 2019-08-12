@@ -2,8 +2,8 @@ const fetch = require("node-fetch");
 const mongoose = require("mongoose");
 const Inventory = mongoose.model("inventory");
 const Product = mongoose.model("products");
-const requireLogin = require('../middlewares/requireLogin')
-const requireAdmin = require('../middlewares/requireAdmin')
+const requireLogin = require("../middlewares/requireLogin");
+const requireAdmin = require("../middlewares/requireAdmin");
 const _ = require("lodash");
 module.exports = app => {
   function sendBackArray(res, productsArray) {
@@ -50,7 +50,7 @@ module.exports = app => {
     mapProducts(products, todayDate, productsArray, res);
     console.log("I");
   }
-  app.get("/api/v1/inventory", requireLogin,(req, res) => {
+  app.get("/api/v1/inventory", requireLogin, (req, res) => {
     var todayDate = "";
     var productsArray = [];
     var tempArray = [];
@@ -67,7 +67,7 @@ module.exports = app => {
       });
     console.log("1");
   });
-  app.get("/api/v1/inventory/:id",requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/:id", requireLogin, (req, res) => {
     const requestId = req.params.id;
     Product.aggregate([
       {
@@ -88,7 +88,7 @@ module.exports = app => {
       res.send(productsObject);
     });
   });
-  app.get("/api/v1/inventory/date/:date",requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/date/:date", requireLogin, (req, res) => {
     // date = yyyy-mm-dd
     const fullDate = req.params.date;
     var productsArray = [];
@@ -149,7 +149,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/v1/inventory/:id/:date",requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/:id/:date", requireLogin, (req, res) => {
     const requestId = req.params.id;
     console.log(requestId);
     const requestedDate = req.params.date;
@@ -179,11 +179,13 @@ module.exports = app => {
       });
   });
 
-  app.delete('/api/inventory/:date',requireLogin,requireAdmin,(req,res)=>{
+  app.delete("/api/inventory/:date", requireLogin, requireAdmin, (req, res) => {
     const dateToDelete = req.params.date;
-    Inventory.find({date:dateToDelete}).remove((error,doc)=>{
-      res.status(200).send({message:"ok"})
-    })
-  })
-  
+    Inventory.find({ date: dateToDelete }).remove((error, doc) => {
+      if (error) {
+        res.status(403).send({ message: "error", errorDescription: error });
+      }
+      res.status(200).send({ message: "ok" });
+    });
+  });
 };

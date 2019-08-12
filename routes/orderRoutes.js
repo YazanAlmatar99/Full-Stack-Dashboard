@@ -29,9 +29,9 @@ module.exports = app => {
     }).save((error, doc) => {
       if (error) {
         console.log(error);
-        res.send({message:"error",errorDescription:error})
+        res.send({ message: "error", errorDescription: error });
       } else {
-        res.status(200).send({message:"ok"})
+        res.status(200).send({ message: "ok" });
         console.log(doc);
       }
     });
@@ -111,26 +111,13 @@ module.exports = app => {
 
   app.get("/api/cocreation/:name/:id", (req, res) => {
     const influencerName = req.params.name;
-    console.log(influencerName);
     const productId = parseInt(req.params.id);
-    console.log("A");
-    Influencer.find({ name: influencerName }).then(influencer => {
-      console.log("B");
-      Order.find({ "line_items.id": productId })
-        .then(orders => {
-          console.log("C");
-          console.log(orders)
-          var theInfluencer = influencer
-          theInfluencer.orders = orders;
-          console.log(theInfluencer)
-          return theInfluencer;
-        })
-        .then(inf => {
-          console.log("D");
-          console.log(inf)
-          
-          res.send(inf);
-        });
+    Influencer.find({ name: influencerName }).lean().then(influencer => {
+      Order.find({ "line_items.id": productId }).lean().then(orders => {
+        var theInfluencer = influencer[0]
+        theInfluencer.orders = orders;
+        res.send(theInfluencer);
+      });
     });
   });
 };

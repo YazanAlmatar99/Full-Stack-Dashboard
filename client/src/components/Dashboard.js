@@ -17,6 +17,7 @@ class Dashboard extends React.Component {
       console.log("the user auth function is done");
       console.log(res.data.googleId)
       this.setState({userGoogleIdFromRes: res.data})
+      console.log(this.state.userGoogleIdFromRes.role)
     });
   }
   renderContent() {

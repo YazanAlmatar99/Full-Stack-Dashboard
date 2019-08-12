@@ -63,3 +63,45 @@ It will log out the user
 
 -GET: /auth/current_user
 It will return the current signed on user if exists
+
+
+**************Order Routes**************
+-POST: /api/cocreation
+body:comes from shopify, it saves part of the order information to the database
+It saves the following proprties:
+    id:String,
+    email:String,
+    created_at:String,
+    updated_at:String,
+    note:String,
+    line_items:Object,
+    total_price:String,
+    discount_codes:Object
+
+-GET: /api/cocreation/:name
+It gets all the products of the passed name 
+
+-GET: /api/cocreation/:name/:id
+It recieves the product and it's orders history
+
+
+
+
+**************Local Deployment**************
+install yarn & npm
+Go to the root folder, run 'npm install'
+Go to the client folder, run 'npm install'
+From the root folder, run 'yarn dev' to start the project
+
+**************Heroku Deployment**************
+Create the app on heroku
+Add the environment variables on heroku 
+Open terminal, run 'npm install -g heroku'
+On terminal, run 'heroku login'
+On terminal, run 'heroku git:clone -a dashboard-analuisa'
+On terminal, run 'cd dashboard-analuisa'
+
+TO PUSH:
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
