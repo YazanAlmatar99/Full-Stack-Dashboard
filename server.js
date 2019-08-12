@@ -12,6 +12,8 @@ require("./models/Horoscope");
 require("./models/Product");
 require("./models/Inventory");
 require("./OAuth/passport");
+require("./models/Order");
+require("./models/Influencer");
 const app = express();
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');
@@ -41,12 +43,6 @@ app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
 
-app.post('/api/world', (req, res) => {
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`,
-  );
-}); 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
@@ -63,5 +59,7 @@ require("./routes/fetchRoutes")(app);
 require("./routes/authRoutes")(app);
 require("./routes/inventoryRoutes")(app);
 require("./routes/horoscopeRoutes")(app);
+require("./routes/orderRoutes")(app);
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

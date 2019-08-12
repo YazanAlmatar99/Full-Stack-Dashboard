@@ -178,5 +178,12 @@ module.exports = app => {
         console.log("this should be the end");
       });
   });
+
+  app.delete('/api/inventory/:date',(req,res)=>{
+    const dateToDelete = req.params.date;
+    Inventory.find({date:dateToDelete}).remove((error,doc)=>{
+      res.status(200).send({message:"ok"})
+    })
+  })
   
 };
