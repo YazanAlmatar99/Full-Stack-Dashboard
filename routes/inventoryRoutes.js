@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Inventory = mongoose.model("inventory");
 const Product = mongoose.model("products");
 const requireLogin = require('../middlewares/requireLogin')
-
+const requireAdmin = require('../middlewares/requireAdmin')
 const _ = require("lodash");
 module.exports = app => {
   function sendBackArray(res, productsArray) {
@@ -179,7 +179,7 @@ module.exports = app => {
       });
   });
 
-  app.delete('/api/inventory/:date',(req,res)=>{
+  app.delete('/api/inventory/:date',requireLogin,requireAdmin,(req,res)=>{
     const dateToDelete = req.params.date;
     Inventory.find({date:dateToDelete}).remove((error,doc)=>{
       res.status(200).send({message:"ok"})

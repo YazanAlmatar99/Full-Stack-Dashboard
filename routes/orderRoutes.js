@@ -29,7 +29,9 @@ module.exports = app => {
     }).save((error, doc) => {
       if (error) {
         console.log(error);
+        res.send({message:"error",errorDescription:error})
       } else {
+        res.status(200).send({message:"ok"})
         console.log(doc);
       }
     });
@@ -126,6 +128,7 @@ module.exports = app => {
         .then(inf => {
           console.log("D");
           console.log(inf)
+          
           res.send(inf);
         });
     });

@@ -5,7 +5,7 @@ const Inventory = mongoose.model("inventory");
 const keys = require("../config/keys");
 module.exports = app => {
   var dateTime = new Date().toISOString();
-  async function storeProduct(product) {
+  async function storeProduct(product,res) {
     const existingProduct = await Product.findOne({ id: product.id })
       .then(existingProduct => {
         if (!existingProduct) {
@@ -43,11 +43,11 @@ module.exports = app => {
         }
       })
       .catch(error => {
-        console.log(error);
+        res.send({message:'error', errorDescription:error})
       });
   }
 
-  async function storeInventory(product) {
+  async function storeInventory(product,res) {
     var theVariants = [];
     product.variants.map(variant => {
       theVariants.push({
@@ -62,7 +62,11 @@ module.exports = app => {
       date: dateTime,
       product_id: product.product_id,
       variants: theVariants
-    }).save();
+    }).save((error,user)=>{
+      if(error){
+        res.send(error)
+      }
+    });
   }
 
   async function addToDB(res, page, allProducts) {
@@ -77,7 +81,7 @@ module.exports = app => {
       .then(products => {
         if (products.length != 0) {
           page = page + 1;
-          addToDB(null, page, allProducts);
+          addToDB(res, page, allProducts);
         } else {
           return true;
         }
@@ -85,8 +89,8 @@ module.exports = app => {
       .then(finished => {
         if (finished) {
           allProducts.map(product => {
-            storeProduct(product);
-            storeInventory(product);
+            storeProduct(product,res);
+            storeInventory(product,res);
           });
         }
       })
