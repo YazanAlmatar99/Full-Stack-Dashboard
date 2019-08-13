@@ -7,7 +7,6 @@ class Header extends React.Component {
       case null:
         return;
         case false:
-
         return (
           <li>
             <a href="/auth/google">

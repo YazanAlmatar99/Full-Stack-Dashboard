@@ -1,33 +1,64 @@
-import React from "react";
-import { connect } from "react-redux";
-class Products extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userGoogleIdFromRes: null
-    };
-  }
+// import React from "react";
+// import { connect } from "react-redux";
+// class Products extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       userGoogleIdFromRes: null
+//     };
+//   }
 
-  renderContent() {
+//   renderContent() {
     
-  }
+//   }
  
-  fetchProducts = () => {
-    console.log('the button is being pressed on the client side')
+//   fetchProducts = () => {
+//     console.log('the button is being pressed on the client side')
 
-  };
-  render() {
+//   };
+//   render() {
+//     return (
+//       <div>
+//         <button onClick={this.fetchProducts}>
+//           Fetch Products
+//         </button>
+//       </div>
+//     );
+//   }
+// }
+
+// const mapStateToProps = state => {
+//   return { auth: state.auth };
+// };
+// export default connect(mapStateToProps)(Products);
+import React from 'react';
+import "../App.css"
+
+class Products extends React.Component {
+
+render(){
+
+   
+
+
+
+
     return (
-      <div>
-        <button onClick={this.fetchProducts}>
-          Fetch Products
-        </button>
-      </div>
-    );
-  }
+        <div className="demo-card-wide mdl-card mdl-shadow--2dp">
+            <div className="mdl-card__title">
+                <h2 className="mdl-card__title-text">Products</h2>
+            </div>
+            <div className="mdl-card__supporting-text">
+                Manage and view Products
+            </div>
+            <div className="mdl-card__actions mdl-card--border">
+                <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                Enter
+                </a>
+            </div>            
+        </div>
+    )
+}
 }
 
-const mapStateToProps = state => {
-  return { auth: state.auth };
-};
-export default connect(mapStateToProps)(Products);
+ export default Products;
