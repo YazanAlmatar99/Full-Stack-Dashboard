@@ -4,7 +4,6 @@ const Product = mongoose.model("products");
 const Inventory = mongoose.model("inventory");
 const keys = require("../config/keys");
 module.exports = app => {
-  var dateTime = new Date().toISOString();
   async function storeProduct(product,res) {
     const existingProduct = await Product.findOne({ id: product.id })
       .then(existingProduct => {
@@ -49,6 +48,7 @@ module.exports = app => {
 
   async function storeInventory(product,res) {
     var theVariants = [];
+    var dateTime = new Date().toISOString();
     product.variants.map(variant => {
       theVariants.push({
         id: variant.id,

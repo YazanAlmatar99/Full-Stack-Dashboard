@@ -179,7 +179,7 @@ module.exports = app => {
       });
   });
 
-  app.delete("/api/inventory/:date", requireLogin, requireAdmin, (req, res) => {
+  app.delete("/api/inventory/:date", (req, res) => {
     const dateToDelete = req.params.date;
     Inventory.find({ date: dateToDelete }).remove((error, doc) => {
       if (error) {
