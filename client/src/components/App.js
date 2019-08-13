@@ -1,23 +1,31 @@
-import React from 'react';
+import React from "react";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
+import QRCodeGenerator from "./QRCodeGenerator";
+import Menu from "./Menu";
+import Products from './Products'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actions from '../actions'
+import * as actions from "../actions";
 
 class App extends React.Component {
-
   componentDidMount() {
     this.props.fetchUser();
   }
 
   render() {
     return (
-        <div className="container">
+      <div className="container">
         <Router>
           <div>
-          <Route exact path="/" component={Header} />          
-          <Route exact path="/a/dashboard" component={Dashboard} />
+            <Route exact path="/" component={Header} />
+            <Route exact path="/a/dashboard" component={Dashboard} />
+            <Route
+              exact
+              path="/a/dashboard/qrgenerator"
+              component={QRCodeGenerator}
+            />
+            <Route exact path="/a/dashboard/products" component={Products} />
           </div>
         </Router>
       </div>
@@ -26,5 +34,7 @@ class App extends React.Component {
   }
 }
 
-
-export default connect(null,actions)(App);
+export default connect(
+  null,
+  actions
+)(App);
