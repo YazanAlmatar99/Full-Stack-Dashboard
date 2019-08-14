@@ -9,15 +9,20 @@ class Products extends React.Component {
 
 
     fetchProducts = async ()=>{
-        const response = await fetch('/api/v1/inventory/1768381055018', {
+        const response = await fetch('/api/v1/inventory', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
             }
             
           }).then((response)=>{
+              
             console.log(response)
-
+            console.log(response.body)
+            return response.json();
+          }).then(data=>{
+              console.log(data)
+              console.log('inside function')
           });
     }
 

@@ -19,6 +19,9 @@ module.exports = app => {
     await Inventory.findOne({ id: product.id, date: todayDate }).then(
       inventory => {
         console.log("F");
+        console.log(inventory)
+        console.log(product.id)
+        console.log(todayDate)
         product.updated_date = inventory.date;
         for (var i = 0; i < inventory.variants.length; i++) {
           console.log("inside loop");

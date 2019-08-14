@@ -4,6 +4,7 @@ const Product = mongoose.model("products");
 const Inventory = mongoose.model("inventory");
 const keys = require("../config/keys");
 module.exports = app => {
+
   async function storeProduct(product,res) {
     const existingProduct = await Product.findOne({ id: product.id })
       .then(existingProduct => {
@@ -46,9 +47,8 @@ module.exports = app => {
       });
   }
 
-  async function storeInventory(product,res) {
+  async function storeInventory(product,res,dateTime) {
     var theVariants = [];
-    var dateTime = new Date().toISOString();
     product.variants.map(variant => {
       theVariants.push({
         id: variant.id,
@@ -90,7 +90,7 @@ module.exports = app => {
         if (finished) {
           allProducts.map(product => {
             storeProduct(product,res);
-            storeInventory(product,res);
+            storeInventory(product,res,dateTime);
           });
         }
       })
@@ -103,8 +103,9 @@ module.exports = app => {
       var page;
       page = 1;
       var allProducts = [];
+      var dateTime = new Date().toISOString();
 
-      await addToDB(res, page, allProducts);
+      await addToDB(res, page, allProducts,dateTime);
       await res.send({ message: "ok" });
     } else {
       res.status(401).send({ message: "unauthorized" });
