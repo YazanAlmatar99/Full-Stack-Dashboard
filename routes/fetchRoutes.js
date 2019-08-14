@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Product = mongoose.model("products");
 const Inventory = mongoose.model("inventory");
 const keys = require("../config/keys");
+const costJSON = require('../products_cost.json')
 module.exports = app => {
 
   async function storeProduct(product,res) {
@@ -15,8 +16,7 @@ module.exports = app => {
               id: variant.id,
               price: variant.price,
               sku: variant.sku,
-              product_id: product.id,
-              cost_per_item: ""
+              product_id: product.id
             });
           });
           const productInfo = new Product({
@@ -53,7 +53,10 @@ module.exports = app => {
       theVariants.push({
         id: variant.id,
         product_id: product.id,
-        inventory_quantity: variant.inventory_quantity
+        inventory_quantity: variant.inventory_quantity,
+        sku:variant.sku,
+        price:variant.price,
+        cost_per_item:costJSON[`${variant.id}`].cost_per_item
       });
     });
 
@@ -112,4 +115,6 @@ module.exports = app => {
       res.status(401).send({ message: "unauthorized" });
     }
   });
+
+   
 };

@@ -15,14 +15,17 @@ require("./OAuth/passport");
 require("./models/Order");
 require("./models/Influencer");
 const app = express();
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, auth');
-//     res.header('Access-Control-Allow-Credentials', 'true');
-//     next();
-//   });
-  
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, auth');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  if ('OPTIONS' == req.method) {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 app.use(
     cookieSession({
       maxAge: 30 * 24 * 60 * 60 * 1000,

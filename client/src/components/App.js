@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import QRCodeGenerator from "./QRCodeGenerator";
 import Menu from "./Menu";
 import Products from './Products'
+import Inventory from './Inventory'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -26,6 +27,7 @@ class App extends React.Component {
               component={QRCodeGenerator}
             />
             <Route exact path="/a/dashboard/products" component={Products} />
+            <Route exact path="/a/dashboard/products/inventory/:id" component={Inventory} />
           </div>
         </Router>
       </div>

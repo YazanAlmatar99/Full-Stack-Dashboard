@@ -18,20 +18,25 @@ module.exports = app => {
     console.log("E");
     await Inventory.findOne({ id: product.id, date: todayDate }).then(
       inventory => {
-        console.log("F");
-        console.log(inventory)
-        console.log(product.id)
-        console.log(todayDate)
-        product.updated_date = inventory.date;
-        for (var i = 0; i < inventory.variants.length; i++) {
-          console.log("inside loop");
-          product.variants[i].inventory_quantity =
-            inventory.variants[i].inventory_quantity;
-        }
-        productsArray.push(product);
+        if (inventory){
+          console.log("F");
+          console.log(inventory)
+          console.log(product.id)
+          console.log(todayDate)
+          product.updated_date = inventory.date;
+          for (var i = 0; i < inventory.variants.length; i++) {
+            console.log("inside loop");
+            product.variants[i].inventory_quantity =
+              inventory.variants[i].inventory_quantity;
+              product.variants[i].cost_per_item = inventory.variants[i].cost_per_item;
 
-        console.log("G");
-        return product;
+          }
+          productsArray.push(product);
+  
+          console.log("G");
+          return product;
+        }
+       
       }
     );
     console.log("-");
@@ -53,7 +58,7 @@ module.exports = app => {
     mapProducts(products, todayDate, productsArray, res);
     console.log("I");
   }
-  app.get("/api/v1/inventory", requireLogin, (req, res) => {
+  app.get("/api/v1/inventory",requireLogin, requireAdmin, (req, res) => {
     var todayDate = "";
     var productsArray = [];
     var tempArray = [];
@@ -70,7 +75,7 @@ module.exports = app => {
       });
     console.log("1");
   });
-  app.get("/api/v1/inventory/:id", requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/:id",requireLogin, requireAdmin, (req, res) => {
     const requestId = req.params.id;
     Product.aggregate([
       {
@@ -91,7 +96,7 @@ module.exports = app => {
       res.send(productsObject);
     });
   });
-  app.get("/api/v1/inventory/date/:date", requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/date/:date",requireLogin,requireAdmin, (req, res) => {
     // date = yyyy-mm-dd
     const fullDate = req.params.date;
     var productsArray = [];
@@ -119,12 +124,18 @@ module.exports = app => {
         id: product.id,
         date: { $regex: `${fullDate}T*` }
       }).then(inventory => {
-        product.updated_date = inventory.date;
+        console.log(inventory)
+        console.log('---------------------')
+        console.log(product)
+        if (inventory) {
+          product.updated_date = inventory.date;
         for (var i = 0; i < inventory.variants.length; i++) {
           console.log("inside loop");
           product.variants[i].inventory_quantity =
             inventory.variants[i].inventory_quantity;
         }
+        }
+        
         productsArray.push(product);
 
         console.log("G");
@@ -144,7 +155,7 @@ module.exports = app => {
 
       console.log("H");
     }
-
+ 
     function sendBackDate(products, fullDate, productsArray, res) {
       console.log("C");
       mapProductsDate(products, fullDate, productsArray, res);
@@ -152,7 +163,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/v1/inventory/:id/:date", requireLogin, (req, res) => {
+  app.get("/api/v1/inventory/:id/:date", requireAdmin,requireLogin, (req, res) => {
     const requestId = req.params.id;
     console.log(requestId);
     const requestedDate = req.params.date;
@@ -182,7 +193,7 @@ module.exports = app => {
       });
   });
 
-  app.delete("/api/inventory/:date", (req, res) => {
+  app.delete("/api/inventory/:date", requireLogin, requireAdmin,(req, res) => {
     const dateToDelete = req.params.date;
     Inventory.find({ date: dateToDelete }).remove((error, doc) => {
       if (error) {
