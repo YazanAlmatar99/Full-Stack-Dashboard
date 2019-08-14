@@ -69,7 +69,7 @@ module.exports = app => {
     });
   }
 
-  async function addToDB(res, page, allProducts) {
+  async function addToDB(res, page, allProducts,dateTime) {
     fetch(
       `https://${keys.analuisaApiKey}@analuisaparis.myshopify.com/admin/products.json?limit=250&page=${page}`
     )
@@ -81,7 +81,7 @@ module.exports = app => {
       .then(products => {
         if (products.length != 0) {
           page = page + 1;
-          addToDB(res, page, allProducts);
+          addToDB(res, page, allProducts,dateTime);
         } else {
           return true;
         }
@@ -99,11 +99,12 @@ module.exports = app => {
       });
   }
   app.post("/api/v1/inventory", async (req, res) => {
+    var dateTime = new Date().toISOString(); 
+
     if (req.query.analuisa_secret === keys.googleTriggerKey) {
       var page;
       page = 1;
       var allProducts = [];
-      var dateTime = new Date().toISOString();
 
       await addToDB(res, page, allProducts,dateTime);
       await res.send({ message: "ok" });
