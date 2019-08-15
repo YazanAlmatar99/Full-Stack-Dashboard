@@ -16,7 +16,8 @@ module.exports = app => {
               id: variant.id,
               price: variant.price,
               sku: variant.sku,
-              product_id: product.id
+              product_id: product.id,
+              title:variant.title
             });
           });
           const productInfo = new Product({
@@ -53,6 +54,7 @@ module.exports = app => {
       theVariants.push({
         id: variant.id,
         product_id: product.id,
+        title:variant.title,
         inventory_quantity: variant.inventory_quantity,
         sku:variant.sku,
         price:variant.price,
@@ -109,7 +111,7 @@ module.exports = app => {
       page = 1;
       var allProducts = [];
 
-      await addToDB(res, page, allProducts,dateTime);
+      await addToDB(res, page, allProducts,dateTime)
       await res.send({ message: "ok" });
     } else {
       res.status(401).send({ message: "unauthorized" });
