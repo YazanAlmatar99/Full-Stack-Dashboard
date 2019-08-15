@@ -3,8 +3,11 @@ module.exports = app => {
   const requireLogin = require('../middlewares/requireLogin')
   const Horoscope = mongoose.model("horoscope");
   const cors = require('cors')
+  var whitelist = ['https://sleepy-cove-91820.herokuapp.com/']
 
-  app.post("/api/v1/horoscope",cors(),async (req, res) => {
+  app.post("/api/v1/horoscope",async (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+
     if (req.query.qName) {
       console.log(
         req.query.qName,
@@ -39,10 +42,12 @@ module.exports = app => {
     }
   });
 
-  app.put("/api/v1/horoscope/:id", cors(),(req, res) => {
+  app.put("/api/v1/horoscope/:id", (req, res) => {
     console.log(
       "***************this is the data from the put request****************"
     );
+    res.header('Access-Control-Allow-Origin', '*');
+
     console.log(req.query);
     console.log("*********************");
     if (Object.keys(req.query).length) {
@@ -70,7 +75,9 @@ module.exports = app => {
     }
   });
 
-  app.delete("/api/v1/horoscope/:id",cors(),requireLogin, (req, res) => {
+  app.delete("/api/v1/horoscope/:id",requireLogin, (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+
     console.log("***********w*authorized************");
     console.log(req.query["0"]);
     console.log(req);

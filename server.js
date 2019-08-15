@@ -26,11 +26,7 @@ app.all('*', function(req, res, next) {
     next();
   }
 });
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://sleepy-cove-91820.herokuapp.com/");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
 
 app.use(
     cookieSession({

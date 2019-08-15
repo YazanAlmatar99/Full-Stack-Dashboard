@@ -33,6 +33,8 @@ class Inventory extends React.Component {
       .then(data => {
         this.setState({ response: data });
         this.daysDiffFinder();
+        this.velocityFinder();
+
       });
   };
   getInStock() {
@@ -91,8 +93,11 @@ class Inventory extends React.Component {
       console.log(this.state.response);
       console.log(title);
       console.log("--------------------------------");
-      // velocityObject[inv.id] = {}
-      this.setState({velocityArr:velocity})
+      console.log(inv.id)
+      velocityObject[inv.id] = {
+        title:title,
+        velocity:velocity
+      }
 
     //   return (
     //     <div>
@@ -106,8 +111,31 @@ class Inventory extends React.Component {
     // return velocityData;
   })
 
+  this.setState({velocityObject:velocityObject})
+  console.log(velocityObject,"velocity Object")
+ 
 }
-
+velocityRender = () => {
+  if (this.state.velocityObject != null){
+    var velocityState = this.state.velocityObject
+  var velocityVar = this.state.response[0].variants.map(variant=>{
+    console.log("*******")
+    console.log(variant)
+    console.log(velocityState)
+    console.log("*******")
+   return (
+     <div>
+       <h6>
+       {velocityState[variant.id].title}
+       {velocityState[variant.id].velocity}
+       </h6>
+     </div>
+   )
+  })
+  return velocityVar;
+  }
+  
+}
   renderContent() {
     if (this.state.response) {
       /************html*************/
@@ -153,7 +181,7 @@ class Inventory extends React.Component {
                   <h2 className="mdl-card__title-text">Welcome</h2>
                 </div>
                 <div className="mdl-card__supporting-text">
-                  {/* {this.velocityFinder()} */}
+                  {this.velocityRender()}
                 </div>
                 <div className="mdl-card__actions mdl-card--border">
                   <a className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
