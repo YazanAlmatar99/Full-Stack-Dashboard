@@ -3,17 +3,8 @@ module.exports = app => {
   const requireLogin = require('../middlewares/requireLogin')
   const Horoscope = mongoose.model("horoscope");
   const cors = require('cors')
-  var whitelist = ['https://sleepy-cove-91820.herokuapp.com/']
-  var corsOptions = {
-    origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1 || !origin) {
-        callback(null, true)
-      } else {
-        callback(new Error('Not allowed by CORS'))
-      }
-    }
-  }
-  app.post("/api/v1/horoscope",async (req, res) => {
+
+  app.post("/api/v1/horoscope",cors(),async (req, res) => {
     if (req.query.qName) {
       console.log(
         req.query.qName,
@@ -48,7 +39,7 @@ module.exports = app => {
     }
   });
 
-  app.put("/api/v1/horoscope/:id", cors(corsOptions),(req, res) => {
+  app.put("/api/v1/horoscope/:id", cors(),(req, res) => {
     console.log(
       "***************this is the data from the put request****************"
     );
@@ -79,7 +70,7 @@ module.exports = app => {
     }
   });
 
-  app.delete("/api/v1/horoscope/:id",cors(corsOptions),requireLogin, (req, res) => {
+  app.delete("/api/v1/horoscope/:id",cors(),requireLogin, (req, res) => {
     console.log("***********w*authorized************");
     console.log(req.query["0"]);
     console.log(req);
