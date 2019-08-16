@@ -89,10 +89,14 @@ class Products extends React.Component {
   render() {
     return (
       <div className="products-page-wrapper">
-        <h4>Cost of retail: {this.state.costOfRetail}$</h4>
-        <h4>Cost of goods: {this.state.costOfGoods}$</h4>
+        <div className="products-page-header" style={{display:'flex'}}>
+          <h4>Products #: {(this.state.productsArray.length) == 0 ? "   " : this.state.productsArray.length}</h4>
+          <h4>Cost of retail: {(this.state.costOfRetail) ? `${this.state.costOfRetail} $` : "        "}</h4>
+          <h4>Cost of goods: {this.state.costOfGoods}</h4>
+        </div>
+        
         <div className="products-page-header">
-          <h4 className="item">Product</h4>
+          {/* <h4 className="item">Product</h4> */}
           <h4 className="item">Title</h4>
           <h4 className="item">Inventory</h4>
           <h4 className="item">Product Type</h4>

@@ -8,8 +8,8 @@ import OrdersCard from "./OrdersCard";
 import HoroscopeCard from "./HoroscopeCard";
 import InfluencerCard from "./InfluencerCard";
 import Menu from "./Menu";
-import AvatarCard from './AvatarCard';
-import QRCodeGeneratorCard  from './QRCodeGeneratorCard';
+import AvatarCard from "./AvatarCard";
+import QRCodeGeneratorCard from "./QRCodeGeneratorCard";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -28,37 +28,39 @@ class Dashboard extends React.Component {
         // console.log(this.state.userGoogleIdFromRes.role)
       })
       .then(() => {
-          this.componentsShowHandler();        
+        this.componentsShowHandler();
       });
   }
 
   componentsShowHandler = props => {
     if (this.state.userGoogleIdFromRes != null) {
-    console.log(this.state.userGoogleIdFromRes.role);
-    if (this.state.userGoogleIdFromRes.role == "admin") {
-      return (
-        <div className="main_header">
-        <div className="avatar_wrapper">
-         <AvatarCard user = {this.state.userGoogleIdFromRes}/>
-        </div>
+      console.log(this.state.userGoogleIdFromRes.role);
+      if (this.state.userGoogleIdFromRes.role == "admin") {
+        return (
+      
+                <div className="main_header">
+                  <div className="avatar_wrapper">
+                    <AvatarCard user={this.state.userGoogleIdFromRes} />
+                  </div>
+                  <div className="components_wrapper">
+                    {/* <InventoryCard /> */}
+                    <OrdersCard />
+                    <ProductCard />
+                    <HoroscopeCard />
+                    <QRCodeGeneratorCard />
+                  </div>
+                  {/* <QRCodeGenerator/> */}
+                </div>
+              
+        );
+      } else if (this.state.userGoogleIdFromRes.role == "influencer") {
+        return (
           <div className="components_wrapper">
-            <InventoryCard />
-            <OrdersCard />
-            <ProductCard />
-            <HoroscopeCard />
-            <QRCodeGeneratorCard />
+            <InfluencerCard />
           </div>
-          {/* <QRCodeGenerator/> */}
-        </div>
-      );
-    } else if (this.state.userGoogleIdFromRes.role == "influencer") {
-      return (
-        <div className="components_wrapper">
-          <InfluencerCard />
-        </div>
-      );
+        );
+      }
     }
-  }
   };
   renderContent() {
     switch (this.props.auth) {

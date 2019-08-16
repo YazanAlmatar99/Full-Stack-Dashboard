@@ -1,6 +1,6 @@
 import React from "react";
 import QRCode from "qrcode-react";
-import Menu from './Menu'
+import Menu from "./Menu";
 class QRCodeGenerator extends React.Component {
   constructor(props) {
     super(props);
@@ -46,9 +46,8 @@ class QRCodeGenerator extends React.Component {
         this.toggleHander();
       }
     } else if (document.getElementsByClassName("logo-size")[0].checked) {
-      
       var currentSize = this.state.logoSize;
-      console.log(currentSize)
+      console.log(currentSize);
       if (currentSize < 110) {
         this.setState({ logoSize: currentSize + 10 });
       } else {
@@ -73,7 +72,7 @@ class QRCodeGenerator extends React.Component {
       } else {
         this.toggleHander();
       }
-      console.log(currentSize)
+      console.log(currentSize);
     }
   };
   resetSize = () => {
@@ -100,8 +99,17 @@ class QRCodeGenerator extends React.Component {
 
   render() {
     return (
-     
       <div className="generate-qr-main-wrapper">
+        <div
+          className="backButton"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <a href="/a/dashboard">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect back-button">
+              Back
+            </button>
+          </a>
+        </div>
         <div
           id="demo-snackbar-example"
           className="mdl-js-snackbar mdl-snackbar"
@@ -122,7 +130,7 @@ class QRCodeGenerator extends React.Component {
             size={this.state.sizeValue}
           />
         </div>
-   
+
         <div className="download-button-wrapper">
           <a
             style={{ color: "black" }}
@@ -195,7 +203,7 @@ class QRCodeGenerator extends React.Component {
           </button>
         </div>
 
-        <label id="qr-generator-label">{this.state.inputValue}</label>  
+        <label id="qr-generator-label">{this.state.inputValue}</label>
       </div>
     );
   }

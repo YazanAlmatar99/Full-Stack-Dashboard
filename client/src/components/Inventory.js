@@ -218,6 +218,13 @@ class Inventory extends React.Component {
       // }
       return (
         <div>
+          <div className="backButton" style={{display:"flex", justifyContent:"center"}}>
+            <a href="/a/dashboard/products">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect back-button">
+             Back
+            </button>
+            </a>
+          </div>
           <div className="product_info_container">
             <div className="product_info_card">
               <div className="demo-card-wide mdl-card mdl-shadow--2dp">
@@ -226,8 +233,8 @@ class Inventory extends React.Component {
                   style={{ backgroundImage: `url(${imageURL})` }}
                 >
                   <h2 className="mdl-card__title-text">
-                    {this.state.response[0].title} -{" "}
-                    {this.state.response[0].product_type}
+                    {this.state.response[0].title} - (
+                    {this.state.response[0].product_type})
                   </h2>
                 </div>
                 <div className="mdl-card__supporting-text">
@@ -248,7 +255,12 @@ class Inventory extends React.Component {
                 <div className="mdl-card__supporting-text">
                   {
                     <h4>
-                     {(this.state.globalStockDays != NaN && this.state.globalStockDays != Infinity) ? `Average Out Of Stock Days: ${this.state.globalStockDays}`  : "N/A" } 
+                      {this.state.globalStockDays != NaN &&
+                      this.state.globalStockDays != Infinity
+                        ? `Average Out Of Stock Days: ${
+                            this.state.globalStockDays
+                          }`
+                        : "N/A"}
                     </h4>
                   }
                   {this.velocityRender() ? this.velocityRender() : null}
@@ -260,7 +272,18 @@ class Inventory extends React.Component {
         </div>
       );
     }
-    return <Loading />;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          margin: "auto",
+          marginTop: "150px"
+        }}
+      >
+        <Loading />
+      </div>
+    );
   }
 
   render() {
