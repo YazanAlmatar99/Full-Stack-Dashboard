@@ -16,6 +16,7 @@ class Products extends React.Component {
   componentDidMount() {
     this.fetchProducts();
   }
+  
   renderProducts() {
     if (this.state.productsArray[0]) {
       const title = this.state.productsArray[0].title;
