@@ -57,7 +57,7 @@ app.use(
       keys: [keys.cookieKey]
     })
   );
-
+app.use(cors())
 app.use(cookieParser());
 
 app.use(passport.initialize());
