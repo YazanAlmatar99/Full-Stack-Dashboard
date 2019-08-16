@@ -15,23 +15,40 @@ require("./OAuth/passport");
 require("./models/Order");
 require("./models/Influencer");
 const app = express();
-app.all('*', function(req, res, next) {
+// app.all('*', function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, auth');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   if ('OPTIONS' == req.method) {
+//     res.sendStatus(200);
+//   } else {
+//     next();
+//   }
+// });
+
+var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, auth');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+  // intercept OPTIONS method
   if ('OPTIONS' == req.method) {
-    res.sendStatus(200);
-  } else {
+    res.send(200);
+  }
+  else {
     next();
   }
-});
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+};
 
+app.configure(function () {
+  app.use(allowCrossDomain);
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.static(path.join(application_root, "public")));
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
 
 
 app.use(
