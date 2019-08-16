@@ -229,10 +229,10 @@ class Inventory extends React.Component {
             <div className="product_info_card">
               <div className="demo-card-wide mdl-card mdl-shadow--2dp">
                 <div
-                  className="mdl-card__title"
-                  style={{ backgroundImage: `url(${imageURL})` }}
+                  className="mdl-card__title" 
+                  style={{ backgroundImage: `url(${imageURL})`,height:"270px" }}
                 >
-                  <h2 className="mdl-card__title-text">
+                  <h2 className="mdl-card__title-text">s
                     {this.state.response[0].title} - (
                     {this.state.response[0].product_type})
                   </h2>
@@ -249,7 +249,7 @@ class Inventory extends React.Component {
             </div>
             <div className="stat_container">
               <div className="demo-card-wide mdl-card mdl-shadow--2dp">
-                <div className="mdl-card__title">
+                <div className="mdl-card__title" style={{height:"270px"}}>
                   <h2 className="mdl-card__title-text">Statistics</h2>
                 </div>
                 <div className="mdl-card__supporting-text">
@@ -258,7 +258,7 @@ class Inventory extends React.Component {
                       {this.state.globalStockDays != NaN &&
                       this.state.globalStockDays != Infinity
                         ? `Average Out Of Stock Days: ${
-                            this.state.globalStockDays
+                            this.state.globalStockDays.toFixed(0)
                           }`
                         : "N/A"}
                     </h4>
@@ -278,7 +278,7 @@ class Inventory extends React.Component {
           display: "flex",
           justifyContent: "center",
           margin: "auto",
-          marginTop: "150px"
+          marginTop: "150px",
         }}
       >
         <Loading />

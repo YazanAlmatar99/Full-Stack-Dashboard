@@ -27,7 +27,7 @@ const ProductComponenet = props => {
         <h6>{props.title}</h6>
         <h6>{totalInventory}{(numberOfVariants == 1) ? '' : ` of ${numberOfVariants}`   }</h6>
         <h6>{props.product_type}</h6>
-        <h6>{props.variants[0].price}</h6>
+        <h6>{props.variants[0].price}$</h6>
       </div>
           <a href={`/a/dashboard/products/inventory/${props.id}`} className="details-button-a">
         

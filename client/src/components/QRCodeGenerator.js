@@ -5,7 +5,7 @@ class QRCodeGenerator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: "",
+      inputValue: "www.analuisa.com",
       url: "",
       downloadName: "",
       logoSize: 40,
@@ -154,7 +154,7 @@ class QRCodeGenerator extends React.Component {
               onChange={this.onChangeHandler}
             />
             <label className="mdl-textfield__label" htmlFor="sample3">
-              Text...
+              Link...
             </label>
           </div>
         </div>
@@ -192,18 +192,20 @@ class QRCodeGenerator extends React.Component {
           <button
             className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
             onClick={this.biggerQR}
+            style={{boxShadow:"9px 12px 19px #88888F"}}
           >
             <i className="material-icons">add</i>
           </button>
           <button
             className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
             onClick={this.smallerQR}
+            style={{boxShadow:"9px 12px 19px #88888F"}}
           >
             -
           </button>
         </div>
 
-        <label id="qr-generator-label">{this.state.inputValue}</label>
+        <label id="qr-generator-label" style={{marginTop:"10px" ,opacity:"0.5"}}>{this.state.inputValue}</label>
       </div>
     );
   }

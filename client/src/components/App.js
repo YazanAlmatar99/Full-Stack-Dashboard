@@ -52,14 +52,14 @@ class App extends React.Component {
         <div className="mdl-layout__drawer">
           <span className="mdl-layout-title">Menu</span>
           <nav className="mdl-navigation">
-            <a className="mdl-navigation__link" href="">
-              Link
+            <a className="mdl-navigation__link" href="/a/dashboard">
+              Home
             </a>
-            <a className="mdl-navigation__link" href="">
-              Link
+            <a className="mdl-navigation__link" href="/a/dashboard/qrgenerator">
+              Generate QR Codes
             </a>
-            <a className="mdl-navigation__link" href="">
-              Link
+            <a className="mdl-navigation__link" href="/a/dashboard/products">
+              Products
             </a>
             <a className="mdl-navigation__link" href="">
               Link
@@ -92,8 +92,9 @@ class App extends React.Component {
               </Router>
             </div>
           </div>
-        </main>
+        </main>        
       </div>
+     
     );
   }
 }

@@ -136,6 +136,7 @@ text-decoration: underline;
    #generate-qr-wrapper {
      margin-bottom: 50px;
      margin-top: 150px;
+     box-shadow: 9px 12px 19px rgb(84, 84, 102);
    }
    .mdl-button--fab {
      margin: 0 10px;
@@ -223,6 +224,7 @@ text-decoration: underline;
 .chart-comp-container{
   display: flex;
   justify-content: center;
+  margin-bottom: 150px;
 }
 .product-card {
   min-height: 130px !important;
@@ -231,6 +233,13 @@ text-decoration: underline;
   width: 130px !important;
 
 }
+.product-card:hover { 
+  min-height: 200px !important;
+  min-width: 200px !important;
+  height: 300px !important;
+  width: 300px !important;
+}
+
 
 .mdl-layout__drawer-button {
   position: fixed !important;
