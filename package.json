@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "1.0.0",
+  "author":"Yazan Almatar http://www.yazanalmatar.com",
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
